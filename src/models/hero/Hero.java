@@ -1,8 +1,11 @@
-package models;
+package models.hero;
 
 import java.util.HashMap;
 import java.util.Map;
-import models.exceptions.EquipItemErrorException;
+
+import models.StatType;
+import models.items.*;
+import models.exceptions.*;
 
 public class Hero {
   private static final int BASE_XP_TO_LEVEL = 100;
@@ -73,12 +76,11 @@ public class Hero {
     return levelsGained;
   }
 
-
   public boolean equipItem(Item item) throws EquipItemErrorException {
     if(item.getItemLevel() > mLevel) {
       throw new EquipItemErrorException(item.getName() + " could not be equipped. Item level is too high.");
     }
-
+    
     unequipItem(item.getItemSlot());
 
     var itemStats = item.getStats();

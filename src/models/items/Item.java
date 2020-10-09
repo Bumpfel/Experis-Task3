@@ -1,7 +1,8 @@
-package models;
+package models.items;
 
 import java.util.Map;
 
+import models.StatType;
 import models.exceptions.ItemCreationErrorException;
 
 public abstract class Item {
@@ -12,9 +13,7 @@ public abstract class Item {
   
   public abstract Map<StatType, Integer> getStats();
   public abstract ItemSlot getItemSlot();
-  
-  private String[] intervalNames = new String[] { "Apprentice", "Acolyte", "Beast", "Gladiator" };
-  
+    
   public int getItemLevel() {
     return mItemLevel;
   }

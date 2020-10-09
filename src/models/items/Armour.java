@@ -1,7 +1,9 @@
-package models;
+package models.items;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import models.StatType;
 
 public class Armour extends Item {
   public final ArmourType TYPE;

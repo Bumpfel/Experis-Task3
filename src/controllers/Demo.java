@@ -1,22 +1,19 @@
 package controllers;
 
-import models.*;
+import models.items.*;
+import models.hero.*;
 import models.exceptions.EquipItemErrorException;
 
 public class Demo implements IGameController {
   private Hero warrior, ranger, mage;
-  private Item greatAxe, woodenSword, bow, plateHelmet, clothRobe, leatherLeggings, leatherCap;
+  private Item greatAxe, woodenSword, plateHelmet, clothRobe, leatherLeggings, leatherCap;
 
   public Demo() {
     createHeroes();
     createItems();
   }
 
-  public void run() {
-    var someItem = new Armour(ArmourType.CLOTH, ItemSlot.Armour.BODY, 1, "bad item");
-    warrior.equipItem(someItem);
-    warrior.dealDamage();
-    
+  public void run() {    
     // demoLevelUp();
     // demoItems();
     // demoEquipItems();
@@ -33,7 +30,7 @@ public class Demo implements IGameController {
   private void createItems() {
     greatAxe = new Weapon(WeaponType.MELEE, 60, "Great Axe of the Gladiator");
     woodenSword = new Weapon(WeaponType.MELEE, 1, "Wooden Sword of the Apprentice");
-    bow = new Weapon(WeaponType.RANGED, 17, "Long Bow of the Huntard");
+    new Weapon(WeaponType.RANGED, 17, "Long Bow of the Huntard");
 
     plateHelmet = new Armour(ArmourType.PLATE, ItemSlot.Armour.HEAD, 1, "Plate Helmet of the Apprentice");
     leatherCap = new Armour(ArmourType.LEATHER, ItemSlot.Armour.HEAD, 1, "Leather Cap of the Apprentice");
@@ -63,7 +60,6 @@ public class Demo implements IGameController {
     System.out.println("mage gained " + mage.gainXP(xp1) + " levels from " + xp1 + " xp");
     System.out.println("------");
     System.out.println(ranger);
-    
   }
 
   private void demoItems() {  

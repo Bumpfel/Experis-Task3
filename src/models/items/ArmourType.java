@@ -1,22 +1,23 @@
-package models;
+package models.items;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import functions.Formatter;
+import models.StatType;
 
-public enum HeroClass {
-  WARRIOR(150, 10, 3, 1, 30, 5, 2, 1),
-  RANGER(120, 5, 10, 2, 30, 5, 2, 1),
-  MAGE(100, 2, 3, 10, 15, 1, 2, 5);
+public enum ArmourType {
+  CLOTH(10, 0, 1, 3, 5, 0, 1, 2),
+  LEATHER(20, 1, 3, 0, 8, 1, 2, 0),
+  PLATE(30, 3, 1, 0, 12, 2, 1, 0);
 
   public final String DISPLAY_NAME;
+
   private Map<StatType, Integer> mBaseStats = new HashMap<>();
   private Map<StatType, Integer> mStatGains = new HashMap<>();
 
-  private HeroClass(int baseHP, int baseStr, int baseDex, int baseInt, int hpGain, int strGain, int dexGain, int intGain) {
+  private ArmourType(int baseHP, int baseStr, int baseDex, int baseInt, int hpGain, int strGain, int dexGain, int intGain) {
     DISPLAY_NAME = Formatter.formatName(name());
-
     mBaseStats.put(StatType.HEALTH, baseHP);
     mBaseStats.put(StatType.STRENGTH, baseStr);
     mBaseStats.put(StatType.DEXTERITY, baseDex);

@@ -1,4 +1,3 @@
-import models.*;
 import controllers.*;
 
 public class App {

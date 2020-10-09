@@ -1,6 +1,7 @@
-package models;
+package models.items;
 
 import java.util.Map;
+import models.StatType;
 
 public class Weapon extends Item {
   public final int DAMAGE;

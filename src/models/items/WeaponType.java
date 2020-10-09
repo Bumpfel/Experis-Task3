@@ -1,5 +1,6 @@
-package models;
+package models.items;
 
+import models.StatType;
 import functions.Formatter;
 
 public enum WeaponType {
