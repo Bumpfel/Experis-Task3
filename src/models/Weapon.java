@@ -4,6 +4,7 @@ import java.util.Map;
 
 public class Weapon extends Item {
   public final int DAMAGE;
+  private final WeaponSlot WEAPON_SLOT;
   public final WeaponType TYPE;
 
   public Weapon(WeaponType type, int itemLevel, String name) {
@@ -13,12 +14,17 @@ public class Weapon extends Item {
     TYPE = type;
     mItemLevel = itemLevel;
     mName = name;
-    itemSlot = ItemSlot.MAIN_HAND;
+    WEAPON_SLOT = WeaponSlot.MAIN_HAND;
   }
 
   @Override
   public Map<StatType, Integer> getStats() {
     return null;
+  }
+  
+  @Override
+  public ItemSlot getItemSlot() {
+    return WEAPON_SLOT;
   }
 
   @Override

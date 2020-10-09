@@ -28,9 +28,20 @@ public class Hero {
     }
 
     // init equipped items
-    for(ItemSlot slot : ItemSlot.values()) {
+    for(ItemSlot slot : ArmourSlot.values()) {
       mEquippedItems.put(slot, null);
     }
+    for(ItemSlot slot : WeaponSlot.values()) {
+      mEquippedItems.put(slot, null);
+    }
+  }
+
+  public int getXP() {
+    return mOverlappingXP;
+  }
+
+  public int getLevel() {
+    return mLevel;
   }
 
   /**
@@ -71,8 +82,9 @@ public class Hero {
     var itemStats = item.getStats();
     if(itemStats != null) {
       for(StatType stat : itemStats.keySet()) {
-        int current = mStatsFromItems.get(stat);
-        mStatsFromItems.put(stat, current + itemStats.get(stat));
+        int currentValue = mStatsFromItems.get(stat);
+        int itemValue = (int) (itemStats.get(stat) * item.getItemSlot().getEffect());
+        mStatsFromItems.put(stat, currentValue + itemValue);
       }
     }
     
@@ -87,9 +99,9 @@ public class Hero {
       if(oldItemStats != null) {
         // subtract stats from old item
         for (StatType stat : oldItemStats.keySet()) {
-          int current = mStatsFromItems.get(stat);
-          int itemStat = oldItemStats.get(stat);
-          mStatsFromItems.put(stat, current - itemStat);
+          int currentValue = mStatsFromItems.get(stat);
+          int itemValue = (int) (oldItemStats.get(stat) * oldItem.getItemSlot().getEffect());
+          mStatsFromItems.put(stat, currentValue - itemValue);
         }
       }
       mEquippedItems.remove(itemSlot);
@@ -97,7 +109,7 @@ public class Hero {
  }
 
   public int dealDamage() {
-    Weapon weapon = ((Weapon) mEquippedItems.get(ItemSlot.MAIN_HAND));
+    Weapon weapon = ((Weapon) mEquippedItems.get(WeaponSlot.MAIN_HAND));
     if(weapon != null) {
       int weaponDmg = weapon.DAMAGE;
       StatType affectedByStat = weapon.TYPE.AFFECTED_BY_STAT;
