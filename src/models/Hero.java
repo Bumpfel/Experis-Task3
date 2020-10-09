@@ -33,7 +33,12 @@ public class Hero {
     }
   }
 
-  public void gainXP(int xp) {
+  /**
+   * 
+   * @param xp
+   * @return levels gained
+   */
+  public int gainXP(int xp) {
     mOverlappingXP += xp;
     int levelsGained = 0;
     
@@ -42,6 +47,7 @@ public class Hero {
       mOverlappingXP -= mXPRequiredForNextLevel;
       mXPRequiredForNextLevel *= XP_LEVELUP_FACTOR;
       mLevel ++;
+      levelsGained ++;
     }
 
     // update hero stats
@@ -51,6 +57,7 @@ public class Hero {
       int gain = classGains.get(stat);
       mHeroStats.put(stat, currentValue + gain * levelsGained);
     }
+    return levelsGained;
   }
 
 
@@ -94,12 +101,12 @@ public class Hero {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-    builder.append(HERO_CLASS.className + " details:\n");
+    builder.append(HERO_CLASS.className + " details:");
     for(StatType stat : StatType.values()) {
-      builder.append(stat.NAME + ": " + (mHeroStats.get(stat) + mEquippedStatsTotal.get(stat)) + "\n");
+      builder.append("\n" + stat.NAME + ": " + (mHeroStats.get(stat) + mEquippedStatsTotal.get(stat)));
     }
-    builder.append("Level: " + mLevel + "\n");
-    builder.append("XP to next: " + mOverlappingXP);
+    builder.append("\nLevel: " + mLevel);
+    builder.append("\nXP to next: " + mOverlappingXP);
     return builder.toString();
   }
 }

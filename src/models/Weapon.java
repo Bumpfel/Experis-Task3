@@ -7,6 +7,8 @@ public class Weapon extends Item {
   public final WeaponType TYPE;
 
   public Weapon(WeaponType type, int itemLevel, String name) {
+    checkItemLevel(itemLevel, name);
+
     DAMAGE = type.BASE_DMG + (itemLevel * type.SCALING_DMG);
     TYPE = type;
     mItemLevel = itemLevel;

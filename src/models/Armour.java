@@ -9,6 +9,8 @@ public class Armour extends Item {
   private Map<StatType, Integer> mStats = new HashMap<>();
 
   public Armour(ArmourType type, ItemSlot itemSlot, int itemLevel, String name) {
+    checkItemLevel(itemLevel, name);
+
     TYPE = type;
     ITEM_SLOT = itemSlot;
     mItemLevel = itemLevel;
@@ -36,12 +38,12 @@ public class Armour extends Item {
     var baseStats = TYPE.getBaseStats();
     var statGains = TYPE.getStatGains();
     StringBuilder builder = new StringBuilder();
-    builder.append("Item stats for: " + mName + "\n");
-    builder.append("Armour Type: " + TYPE.NAME + "\n");
-    builder.append("Slot: " + ITEM_SLOT.NAME + "\n");
-    builder.append("Item level: " + mItemLevel + "\n");
+    builder.append("Item stats for: " + mName);
+    builder.append("\nArmour Type: " + TYPE.NAME);
+    builder.append("\nSlot: " + ITEM_SLOT.NAME);
+    builder.append("\nItem level: " + mItemLevel);
     for(StatType stat : StatType.values()) {
-      builder.append("Bonus " + stat.NAME + ": " + (baseStats.get(stat) + statGains.get(stat) * mItemLevel) + "\n");
+      builder.append("\nBonus " + stat.NAME + ": " + (baseStats.get(stat) + statGains.get(stat) * mItemLevel));
     }
     
     return builder.toString();
