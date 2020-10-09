@@ -20,5 +20,15 @@ public class Weapon extends Item {
   public Map<StatType, Integer> getStats() {
     return null;
   }
+
+  @Override
+  public String toString() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("Item stats for: " + mName);
+    builder.append("\nWeapon Type: " + TYPE.DISPLAY_NAME);
+    builder.append("\nWeapon Level: " + mItemLevel);
+    builder.append("\nDamage: " + DAMAGE);
+    return builder.toString();
+  }
 }
 
