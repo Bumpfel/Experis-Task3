@@ -17,9 +17,10 @@ public class Armour extends Item {
     var baseStats = type.getBaseStats();
     var statGains = type.getStatGains();
     for(StatType stat : StatType.values()) {
-      mStats.put(stat, baseStats.get(stat) + (statGains.get(stat) * itemLevel));
+      int nr = (int) ((baseStats.get(stat) + (statGains.get(stat) * itemLevel)) * ITEM_SLOT.EFFECT);
+      mStats.put(stat, nr);
     }
-      
+    
     mName = name;
   }
 
@@ -35,15 +36,13 @@ public class Armour extends Item {
 
   @Override
   public String toString() {
-    var baseStats = TYPE.getBaseStats();
-    var statGains = TYPE.getStatGains();
     StringBuilder builder = new StringBuilder();
     builder.append("Item stats for: " + mName);
     builder.append("\nArmour Type: " + TYPE.NAME);
     builder.append("\nSlot: " + ITEM_SLOT.NAME);
     builder.append("\nItem level: " + mItemLevel);
     for(StatType stat : StatType.values()) {
-      builder.append("\nBonus " + stat.NAME + ": " + (baseStats.get(stat) + statGains.get(stat) * mItemLevel));
+      builder.append("\nBonus " + stat.NAME + ": " + mStats.get(stat));
     }
     
     return builder.toString();
