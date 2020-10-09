@@ -13,11 +13,7 @@ public class Weapon extends Item {
     TYPE = type;
     mItemLevel = itemLevel;
     mName = name;
-  }
-
-  @Override
-  public ItemSlot getItemSlot() {
-    return ItemSlot.WEAPON;
+    itemSlot = ItemSlot.MAIN_HAND;
   }
 
   @Override

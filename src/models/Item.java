@@ -7,14 +7,18 @@ import models.exceptions.ItemCreationErrorException;
 public abstract class Item {
   public final int MAX_LEVEL = 100;
 
+  protected ItemSlot itemSlot;
   protected String mName;
   protected int mItemLevel;
 
-  public abstract ItemSlot getItemSlot();
   public abstract Map<StatType, Integer> getStats();
-
+  
   public int getItemLevel() {
     return mItemLevel;
+  }
+  
+  public ItemSlot getItemSlot() {
+    return itemSlot;
   }
 
   protected void checkItemLevel(int itemLevel, String name) {

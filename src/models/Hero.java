@@ -10,7 +10,7 @@ public class Hero {
   private int mLevel = 1, mOverlappingXP, mXPRequiredForNextLevel = BASE_XP_TO_LEVEL;
 
   private Map<StatType, Integer> mHeroStats = new HashMap<>();
-  private Map<StatType, Integer> mEquippedStatsTotal = new HashMap<>(); // this is technically not needed since all the stats are available in the equipped items. this is however a summary for quicker access, and also preventing a calculation be made every single time these values is accessed
+  private Map<StatType, Integer> mStatsFromItems = new HashMap<>(); // this is technically not needed since all the stats are available in the equipped items. this is however a summary for quicker access, and also preventing a calculation be made every single time these values is accessed
   private Map<ItemSlot, Item> mEquippedItems = new HashMap<>();
 
   public Hero(HeroClass heroClass) {
@@ -24,7 +24,7 @@ public class Hero {
     
     // init equipped stats
     for (StatType type : StatType.values()) {
-      mEquippedStatsTotal.put(type, 0);
+      mStatsFromItems.put(type, 0);
     }
 
     // init equipped items
@@ -71,10 +71,13 @@ public class Hero {
     var itemStats = item.getStats();
     if(itemStats != null) {
       for(StatType stat : itemStats.keySet()) {
-        int current = mEquippedStatsTotal.get(stat);
-        mEquippedStatsTotal.put(stat, current + itemStats.get(stat));
+        int current = mStatsFromItems.get(stat);
+        mStatsFromItems.put(stat, current + itemStats.get(stat));
       }
     }
+    System.out.println("equipping " + item);
+    
+    mEquippedItems.put(item.getItemSlot(), item);
     return true;
   }
 
@@ -85,17 +88,24 @@ public class Hero {
       if(oldItemStats != null) {
         // subtract stats from old item
         for (StatType stat : oldItemStats.keySet()) {
-          int current = mEquippedStatsTotal.get(stat);
+          int current = mStatsFromItems.get(stat);
           int itemStat = oldItemStats.get(stat);
-          mEquippedStatsTotal.put(stat, current - itemStat);
-        } 
+          mStatsFromItems.put(stat, current - itemStat);
+        }
       }
       mEquippedItems.remove(itemSlot);
     }
  }
 
-  public void dealDamage() {
-    // TODO implement
+  public int dealDamage() {
+    Weapon weapon = ((Weapon) mEquippedItems.get(ItemSlot.MAIN_HAND));
+    if(weapon != null) {
+      int weaponDmg = weapon.DAMAGE;
+      StatType affectedByStat = weapon.TYPE.AFFECTED_BY_STAT;
+      int dmgFromStats = (int) ((mHeroStats.get(affectedByStat) + mStatsFromItems.get(affectedByStat)) * affectedByStat.DMG_MULTIPLIER);    
+      return weaponDmg + dmgFromStats;
+    }
+    return 0;
   }
 
   @Override
@@ -103,7 +113,7 @@ public class Hero {
     StringBuilder builder = new StringBuilder();
     builder.append(HERO_CLASS.className + " details:");
     for(StatType stat : StatType.values()) {
-      builder.append("\n" + stat.NAME + ": " + (mHeroStats.get(stat) + mEquippedStatsTotal.get(stat)));
+      builder.append("\n" + stat.NAME + ": " + (mHeroStats.get(stat) + mStatsFromItems.get(stat)));
     }
     builder.append("\nLevel: " + mLevel);
     builder.append("\nXP to next: " + mOverlappingXP);
