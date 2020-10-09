@@ -75,7 +75,6 @@ public class Hero {
         mStatsFromItems.put(stat, current + itemStats.get(stat));
       }
     }
-    System.out.println("equipping " + item);
     
     mEquippedItems.put(item.getItemSlot(), item);
     return true;
@@ -111,7 +110,7 @@ public class Hero {
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder();
-    builder.append(HERO_CLASS.className + " details:");
+    builder.append(HERO_CLASS.DISPLAY_NAME + " details:");
     for(StatType stat : StatType.values()) {
       builder.append("\n" + stat.NAME + ": " + (mHeroStats.get(stat) + mStatsFromItems.get(stat)));
     }

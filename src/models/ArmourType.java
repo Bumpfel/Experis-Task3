@@ -3,18 +3,20 @@ package models;
 import java.util.HashMap;
 import java.util.Map;
 
-public enum ArmourType implements ScalingStats {
-  CLOTH("Cloth", 10, 0, 1, 3, 5, 0, 1, 2),
-  LEATHER("Leather", 20, 1, 3, 0, 8, 1, 2, 0),
-  PLATE("Plate", 30, 3, 1, 0, 12, 2, 1, 0);
+import functions.Formatter;
 
-  public final String NAME;
+public enum ArmourType implements ScalingStats {
+  CLOTH(10, 0, 1, 3, 5, 0, 1, 2),
+  LEATHER(20, 1, 3, 0, 8, 1, 2, 0),
+  PLATE(30, 3, 1, 0, 12, 2, 1, 0);
+
+  public final String DISPLAY_NAME;
 
   private Map<StatType, Integer> mBaseStats = new HashMap<>();
   private Map<StatType, Integer> mStatGains = new HashMap<>();
 
-  private ArmourType(String name, int baseHP, int baseStr, int baseDex, int baseInt, int hpGain, int strGain, int dexGain, int intGain) {
-    NAME = name;
+  private ArmourType(int baseHP, int baseStr, int baseDex, int baseInt, int hpGain, int strGain, int dexGain, int intGain) {
+    DISPLAY_NAME = Formatter.formatName(name());
     mBaseStats.put(StatType.HEALTH, baseHP);
     mBaseStats.put(StatType.STRENGTH, baseStr);
     mBaseStats.put(StatType.DEXTERITY, baseDex);

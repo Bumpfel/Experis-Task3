@@ -32,7 +32,7 @@ public class Armour extends Item {
   public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append("Item stats for: " + mName);
-    builder.append("\nArmour Type: " + TYPE.NAME);
+    builder.append("\nArmour Type: " + TYPE.DISPLAY_NAME);
     builder.append("\nSlot: " + itemSlot.NAME);
     builder.append("\nItem level: " + mItemLevel);
     for(StatType stat : StatType.values()) {
