@@ -17,9 +17,13 @@ public abstract class Item {
     return mItemLevel;
   }
 
-  protected void checkItemLevel(int itemLevel) {
+  protected void checkItemLevel(int itemLevel, String name) {
     if(itemLevel <= 0 || itemLevel > MAX_LEVEL) {
-      throw new ItemCreationErrorException("Item cannot be created. Item level must be between 1 and " + MAX_LEVEL);
+      throw new ItemCreationErrorException("\"" + name + "\" cannot be created. Item level must be between 1 and " + MAX_LEVEL);
     }
+  }
+
+  public String getName() {
+    return mName;
   }
 }
