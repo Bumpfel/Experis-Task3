@@ -1,14 +1,16 @@
 package models;
+
 import java.util.HashMap;
 import java.util.Map;
+import models.exceptions.EquipItemErrorException;
 
 public class Hero {
   private static final int BASE_XP_TO_LEVEL = 100;
   private static final double XP_LEVELUP_FACTOR = 1.1;
 
   public final HeroClass HERO_CLASS;
+  
   private int mLevel = 1, mOverlappingXP, mXPRequiredForNextLevel = BASE_XP_TO_LEVEL;
-
   private Map<StatType, Integer> mHeroStats = new HashMap<>();
   private Map<StatType, Integer> mStatsFromItems = new HashMap<>(); // this is technically not needed since all the stats are available in the equipped items. this is however a summary for quicker access, and also preventing a calculation be made every single time these values is accessed
   private Map<ItemSlot, Item> mEquippedItems = new HashMap<>();
@@ -72,9 +74,9 @@ public class Hero {
   }
 
 
-  public boolean equipItem(Item item) {
+  public boolean equipItem(Item item) throws EquipItemErrorException {
     if(item.getItemLevel() > mLevel) {
-      return false;
+      throw new EquipItemErrorException(item.getName() + " could not be equipped. Item level is too high.");
     }
 
     unequipItem(item.getItemSlot());
