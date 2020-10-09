@@ -28,10 +28,10 @@ public class Hero {
     }
 
     // init equipped items
-    for(ItemSlot slot : ArmourSlot.values()) {
+    for(ItemSlot slot : ItemSlot.Armour.values()) {
       mEquippedItems.put(slot, null);
     }
-    for(ItemSlot slot : WeaponSlot.values()) {
+    for(ItemSlot slot : ItemSlot.Weapon.values()) {
       mEquippedItems.put(slot, null);
     }
   }
@@ -109,7 +109,7 @@ public class Hero {
  }
 
   public int dealDamage() {
-    Weapon weapon = ((Weapon) mEquippedItems.get(WeaponSlot.MAIN_HAND));
+    Weapon weapon = ((Weapon) mEquippedItems.get(ItemSlot.Weapon.MAIN_HAND));
     if(weapon != null) {
       int weaponDmg = weapon.DAMAGE;
       StatType affectedByStat = weapon.TYPE.AFFECTED_BY_STAT;

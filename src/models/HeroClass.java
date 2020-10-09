@@ -5,7 +5,7 @@ import java.util.Map;
 
 import functions.Formatter;
 
-public enum HeroClass implements ScalingStats {
+public enum HeroClass {
   WARRIOR(150, 10, 3, 1, 30, 5, 2, 1),
   RANGER(120, 5, 10, 2, 30, 5, 2, 1),
   MAGE(100, 2, 3, 10, 15, 1, 2, 5);

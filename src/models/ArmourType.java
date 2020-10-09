@@ -5,7 +5,7 @@ import java.util.Map;
 
 import functions.Formatter;
 
-public enum ArmourType implements ScalingStats {
+public enum ArmourType {
   CLOTH(10, 0, 1, 3, 5, 0, 1, 2),
   LEATHER(20, 1, 3, 0, 8, 1, 2, 0),
   PLATE(30, 3, 1, 0, 12, 2, 1, 0);

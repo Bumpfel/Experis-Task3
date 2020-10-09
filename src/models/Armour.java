@@ -5,10 +5,10 @@ import java.util.Map;
 
 public class Armour extends Item {
   public final ArmourType TYPE;
-  private final ArmourSlot ARMOUR_SLOT;
+  private final ItemSlot.Armour ARMOUR_SLOT;
   private Map<StatType, Integer> mStats = new HashMap<>();
 
-  public Armour(ArmourType type, ArmourSlot armourSlot, int itemLevel, String name) {
+  public Armour(ArmourType type, ItemSlot.Armour armourSlot, int itemLevel, String name) {
     checkItemLevel(itemLevel, name);
 
     TYPE = type;
