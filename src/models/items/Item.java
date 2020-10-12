@@ -6,7 +6,7 @@ import models.StatType;
 import models.exceptions.ItemCreationErrorException;
 
 public abstract class Item {
-  public final int MAX_LEVEL = 100;
+  public final int MAX_LEVEL = 100; // should probably be decided by the game controller
   
   protected String mName;
   protected int mItemLevel;
@@ -18,19 +18,13 @@ public abstract class Item {
     return mItemLevel;
   }
 
-  protected void checkItemLevel(int itemLevel, String name) throws ItemCreationErrorException {
-    if(itemLevel <= 0 || itemLevel > MAX_LEVEL) {
-      throw new ItemCreationErrorException("\"" + name + "\" cannot be created. Item level must be between 1 and " + MAX_LEVEL);
-    }
-  }
-
   public String getName() {
     return mName;
   }
 
-  public String getGeneratedName() {
-    String str = "";
-
-    return str;
+  protected void checkItemLevel(int itemLevel, String name) throws ItemCreationErrorException {
+    if(itemLevel <= 0 || itemLevel > MAX_LEVEL) {
+      throw new ItemCreationErrorException("\"" + name + "\" cannot be created. Item level must be between 1 and " + MAX_LEVEL);
+    }
   }
 }

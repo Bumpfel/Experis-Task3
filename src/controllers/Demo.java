@@ -13,12 +13,13 @@ public class Demo implements IGameController {
     createItems();
   }
 
-  public void run() {    
-    // demoLevelUp();
-    // demoItems();
-    // demoEquipItems();
+  @Override
+  public void run() {
+    demoLevelUp();
+    demoItems();
+    demoEquipItems();
     demoChangeEquipment();
-    // demoDealDamage();
+    demoDealDamage();
   }
 
   private void createHeroes() {
@@ -32,10 +33,10 @@ public class Demo implements IGameController {
     woodenSword = new Weapon(WeaponType.MELEE, 1, "Wooden Sword of the Apprentice");
     new Weapon(WeaponType.RANGED, 17, "Long Bow of the Huntard");
 
-    plateHelmet = new Armour(ArmourType.PLATE, ItemSlot.Armour.HEAD, 1, "Plate Helmet of the Apprentice");
-    leatherCap = new Armour(ArmourType.LEATHER, ItemSlot.Armour.HEAD, 1, "Leather Cap of the Apprentice");
-    clothRobe = new Armour(ArmourType.CLOTH, ItemSlot.Armour.BODY, 45, "Cloth Robe of the Acolyte");
-    leatherLeggings = new Armour(ArmourType.LEATHER, ItemSlot.Armour.LEGS, 27, "Leather Leggings of the Beast");
+    plateHelmet = new Armour(ArmourType.PLATE, ItemSlot.ArmourSlot.HEAD, 1, "Plate Helmet of the Apprentice");
+    leatherCap = new Armour(ArmourType.LEATHER, ItemSlot.ArmourSlot.HEAD, 1, "Leather Cap of the Apprentice");
+    clothRobe = new Armour(ArmourType.CLOTH, ItemSlot.ArmourSlot.BODY, 45, "Cloth Robe of the Acolyte");
+    leatherLeggings = new Armour(ArmourType.LEATHER, ItemSlot.ArmourSlot.LEGS, 27, "Leather Leggings of the Beast");
   }
  
   private void demoLevelUp() {

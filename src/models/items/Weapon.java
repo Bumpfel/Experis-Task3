@@ -5,8 +5,8 @@ import models.StatType;
 
 public class Weapon extends Item {
   public final int DAMAGE;
-  private final ItemSlot.Weapon WEAPON_SLOT;
   public final WeaponType TYPE;
+  private final ItemSlot.WeaponSlot WEAPON_SLOT;
 
   public Weapon(WeaponType type, int itemLevel, String name) {
     checkItemLevel(itemLevel, name);
@@ -15,7 +15,7 @@ public class Weapon extends Item {
     TYPE = type;
     mItemLevel = itemLevel;
     mName = name;
-    WEAPON_SLOT = ItemSlot.Weapon.MAIN_HAND;
+    WEAPON_SLOT = ItemSlot.WeaponSlot.MAIN_HAND;
   }
 
   @Override
@@ -24,7 +24,7 @@ public class Weapon extends Item {
   }
   
   @Override
-  public ItemSlot.Weapon getItemSlot() {
+  public ItemSlot.WeaponSlot getItemSlot() {
     return WEAPON_SLOT;
   }
 

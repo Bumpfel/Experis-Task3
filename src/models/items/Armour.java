@@ -7,20 +7,22 @@ import models.StatType;
 
 public class Armour extends Item {
   public final ArmourType TYPE;
-  private final ItemSlot.Armour ARMOUR_SLOT;
+  private final ItemSlot.ArmourSlot ARMOUR_SLOT;
   private Map<StatType, Integer> mStats = new HashMap<>();
 
-  public Armour(ArmourType type, ItemSlot.Armour armourSlot, int itemLevel, String name) {
+  public Armour(ArmourType type, ItemSlot.ArmourSlot armourSlot, int itemLevel, String name) {
     checkItemLevel(itemLevel, name);
 
     TYPE = type;
     ARMOUR_SLOT = armourSlot;
     mItemLevel = itemLevel;
+
+    // (base stats + (iLvl * statgain)) * slot weight
     var baseStats = type.getBaseStats();
     var statGains = type.getStatGains();
     for(StatType stat : StatType.values()) {
-      int nr = (int) ((baseStats.get(stat) + (statGains.get(stat) * itemLevel)) * armourSlot.getEffect());
-      mStats.put(stat, nr);
+      int value = (int) ((baseStats.get(stat) + (statGains.get(stat) * itemLevel)) * armourSlot.getSlotWeight());
+      mStats.put(stat, value);
     }
     
     mName = name;
@@ -33,7 +35,7 @@ public class Armour extends Item {
 
   @Override
   public Map<StatType, Integer> getStats() {
-    return Map.copyOf(mStats);
+    return Map.copyOf(mStats); // returns a copy to prevent user modifying original
   }
 
   @Override
@@ -44,7 +46,7 @@ public class Armour extends Item {
     builder.append("\nSlot: " + ARMOUR_SLOT.getDisplayName());
     builder.append("\nItem level: " + mItemLevel);
     for(StatType stat : StatType.values()) {
-      builder.append("\nBonus " + stat.NAME + ": " + mStats.get(stat));
+      builder.append("\nBonus " + stat.DISPLAY_NAME + ": " + mStats.get(stat));
     }
     
     return builder.toString();
